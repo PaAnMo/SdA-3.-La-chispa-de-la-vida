@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="es">
+<head>
+<link rel="stylesheet" type="text/css" href="base.css" />
+<link rel="stylesheet" type="text/css" href="exe_effects.css" />
+<link rel="stylesheet" type="text/css" href="content.css" />
+<link rel="stylesheet" type="text/css" href="nav.css" />
+<meta http-equiv="content-type" content="text/html;  charset=utf-8" />
+<title>4.1. ¿Qué es un circuito eléctrico? Elementos de un circuito eléctrico y funciones básicas. | La chispa de la vida </title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<meta name="author" content="Tecnología" />
+<link rel="license" type="text/html" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" />
+<meta name="generator" content="eXeLearning 2.8.1 - exelearning.net" />
+<!--[if lt IE 9]><script type="text/javascript" src="exe_html5.js"></script><![endif]-->
+<script type="text/javascript" src="exe_jquery.js"></script>
+<script type="text/javascript" src="exe_effects.js"></script>
+<script type="text/javascript" src="common_i18n.js"></script>
+<script type="text/javascript" src="common.js"></script>
+<link rel="stylesheet" type="text/css" href="udl-content.css" />
+<script type="text/javascript" src="udl-content.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"  type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap" rel="stylesheet" type="text/css">
+<link href="https://fonts.cdnfonts.com/css/opendyslexic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"  type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"  type="text/css">
+
+
+<style>
+  
+  .z-index {
+    z-index: 999;
+  }
+
+  .select-container {
+    display: inline-block;
+    position: relative;
+    z-index: 999;
+  }
+
+  .font-button {
+    padding: 8px 16px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 8px;
+    text-align: center;
+    text-decoration: none;
+    background-color: white;
+    color: black;
+    z-index: 999;
+  }
+
+  .fontButtonContainer {
+     z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* establece el wrap para que los botones se distribuyan en varias líneas */
+    gap: 5px; /* ajusta el espacio entre los botones */
+    position: static; /* fija la barra de botones en la página: static para que aparezca en la parte superior, fixed para que quede flotando */
+    top: 40px; /* fija la barra de botones en la parte superior de la página */
+    left: 0; /* fija la barra de botones en el margen izquierdo */
+    right: 0; /* fija la barra de botones en el margen derecho */
+    margin: auto; /* centra la barra de botones horizontalmente */
+  }
+    
+  /* Estilo para el desplegable */
+  select {
+    padding: 8px 4px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 6px;
+    text-align: center;
+    text-decoration: none;
+    background-color: white;
+  }
+  
+  select option {
+  text-align: left;
+  }
+  
+</style>
+
+<script>
+
+// BatexeGo v3 Juan José de Haro 
+
+// Define los textos que se ven en pantalla. Reemplazar el texto entre comillas
+
+  // Textos del menú desplegable
+    const defaultText = 'Parámetros por defecto:'; //Descripción de la opción por defecto
+    const standardText = 'Fuente estándar'; // Fuente original del documento
+    
+    const dyslexicDesc = 'Dislexia:'; // Descripción de la opción OpenDyslexic  
+    const dyslexicText = 'OpenDyslexic'; 
+    
+    const hyperlegibleDesc = 'Deficiencias visuales:'; // Descripción de la opción Atkinson Hyperlegible
+    const hyperlegibleText = 'Atkinson Hyperlegible'; 
+    
+    const highLegibilityDesc = 'Alta legibilidad:'; // Descripción de las opciones de alta legibilidad
+    const opensansText = 'OpenSans'; 
+    const robotoText = 'Roboto'; 
+    const latoText = 'Lato'; 
+    const montserratText = 'Montserrat'; 
+
+  // Botones aumentar y disminuir fuente
+    const increaseFontText = 'A+'; // Botón para incrementar la fuente
+    const increaseFontTitle = 'Incrementa la fuente'; // Texto emergente al pasar el ratón
+    
+    const decreaseFontText = 'A-'; // Botón para reducir la fuente
+    const decreaseFontTitle = 'Reduce la fuente'; // Texto emergente al pasar el ratón
+
+  // Botón para traducir
+    const translateText = '🌐'; // Texto para el botón de traducción de Google
+    const translateTitle = 'Traduce la página'; // Texto emergente al pasar el ratón
+
+  // Botón para leer / detener la lectura en voz alta
+    let readText = 'Leer'; // Botón para leer en voz alta el contenido de la página
+    const readTextTitle ='Lee en voz alta la selección o la página entera'; // Texto emergente al pasar el ratón
+    
+    const stopText = 'Detener'; // Texto del botón para detener la lectura
+    const stopTextTitle = 'Detiene la lectura'; // Texto emergente al pasar el ratón
+  
+  // Botones para que los botones estén siempre visibles
+    let floatingFix = 'Fijar'; // Texto del botón flotante cuando está sobre el texto
+    let floatingFixTitle = 'Fija la barra de botones en la parte superior'; // Texto emergente al pasar el ratón
+    
+    let floatingFloat = 'Flotar'; //Texto del botón flotante cuando está fijo en la parte superior
+    let floatingFloatTitle = 'La barra permanecerá siempre visible';
+  
+  
+  // Enlace +Info
+    const infoText = '+Info'; // Texto del enlace +Info
+    const infoTextLink = 'https://batexego.bilateria.org'; // Destino del enlace de +Info
+
+// Fin 
+  
+
+  readText = `${readText} (${document.documentElement.lang})`; //Se añade el idioma al botón Leer
+  
+
+  let originalFont;
+  let currentFontSize;
+  let originalFontSize;
+  let isReading = false;
+  let utterance = new SpeechSynthesisUtterance();
+  let googleTranslateWidgetVisible = localStorage.getItem('googleTranslateWidgetVisible');
+
+  function setFont(font) {
+  document.body.style.fontFamily = font;
+  localStorage.setItem('font', font);
+  }
+
+  function setFontSize(size) {
+  currentFontSize = parseInt(window.getComputedStyle(document.body).getPropertyValue('font-size'));
+  currentFontSize += size;
+  document.body.style.fontSize = currentFontSize + 'px';
+  localStorage.setItem('fontSize', currentFontSize + 'px');
+  }
+  
+  
+
+function toggleGoogleTranslateWidget() {
+  if (!googleTranslateWidgetVisible) {
+    const script = document.createElement('script');
+    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    script.id = 'google-translate-script';
+    document.head.appendChild(script);
+    
+    const googleTranslateElement = document.createElement('div');
+    googleTranslateElement.id = 'google_translate_element';
+    googleTranslateElement.style.position = 'fixed';
+    googleTranslateElement.style.top = '0';
+    googleTranslateElement.style.right = '0';
+    googleTranslateElement.style.zIndex = '1000';
+    document.body.appendChild(googleTranslateElement);
+
+    window.googleTranslateElementInit = function() {
+      new google.translate.TranslateElement({pageLanguage: 'auto', layout: google.translate.TranslateElement.FloatPosition.TOP_RIGHT}, 'google_translate_element');
+    };
+
+    googleTranslateWidgetVisible = true;
+    
+  } else {
+    const script = document.getElementById('google-translate-script');
+    script.remove();
+    
+    const googleTranslateElement = document.getElementById('google_translate_element');
+    googleTranslateElement.remove();
+
+    googleTranslateWidgetVisible = false;
+  }
+  localStorage.setItem('googleTranslateWidgetVisible',googleTranslateWidgetVisible);
+}
+
+
+
+
+  document.addEventListener('DOMContentLoaded', () => {
+
+    googleTranslateWidgetVisible = JSON.parse(localStorage.getItem('googleTranslateWidgetVisible'));
+  if(googleTranslateWidgetVisible) {
+    googleTranslateWidgetVisible = false;
+    toggleGoogleTranslateWidget();
+  }
+
+    
+  
+    originalFont = window.getComputedStyle(document.body).getPropertyValue('font-family');
+    localStorage.setItem('originalFont', originalFont);
+    let font = localStorage.getItem('font');
+    if (!font) {
+    font = originalFont;
+    }
+    document.body.style.fontFamily = font;
+
+    let fontSize = localStorage.getItem('fontSize');
+    originalFontSize = window.getComputedStyle(document.body).getPropertyValue('font-size');
+    localStorage.setItem('originalFontSize', originalFontSize);
+    if (!fontSize) {
+    fontSize = originalFontSize
+    localStorage.setItem('fontSize', fontSize);
+    }
+    document.body.style.fontSize = fontSize;
+
+    const fontButtonContainer = document.createElement('div');
+    fontButtonContainer.classList.add('fontButtonContainer'); 
+    
+    const selectContainer = document.createElement('div');
+    selectContainer.classList.add('select-container');
+    const select = document.createElement('select');
+    select.classList.add('z-index');
+    const standardOption = document.createElement('option');
+    standardOption.value = 'standard';
+    standardOption.text = standardText;
+
+    const defaultFontOptGroup = document.createElement('optgroup');
+    defaultFontOptGroup.label = defaultText;
+    defaultFontOptGroup.appendChild(standardOption);
+
+    select.appendChild(defaultFontOptGroup);
+
+
+    const dyslexicOption = document.createElement('option');
+    dyslexicOption.value = 'dyslexic';
+    dyslexicOption.text = dyslexicText;
+    select.add(dyslexicOption);
+
+    const dyslexicOptGroup = document.createElement('optgroup');
+    dyslexicOptGroup.label = dyslexicDesc;
+    dyslexicOptGroup.appendChild(dyslexicOption);
+    select.appendChild(dyslexicOptGroup);
+
+    const hyperlegibleOption = document.createElement('option');
+    hyperlegibleOption.value = 'hyperlegible';
+    hyperlegibleOption.text = hyperlegibleText;
+    select.add(hyperlegibleOption);
+
+    const hyperlegibleOptGroup = document.createElement('optgroup');
+    hyperlegibleOptGroup.label = hyperlegibleDesc;
+    hyperlegibleOptGroup.appendChild(hyperlegibleOption);
+    select.appendChild(hyperlegibleOptGroup);
+
+    const opensansOption = document.createElement('option');
+    opensansOption.value = 'Open Sans';
+    opensansOption.text = opensansText;
+    select.add(opensansOption);
+
+    const robotoOption = document.createElement('option');
+    robotoOption.value = 'Roboto';
+    robotoOption.text = robotoText;
+    select.add(robotoOption);
+
+    const latoOption = document.createElement('option');
+    latoOption.value = 'Lato';
+    latoOption.text = latoText;
+    select.add(latoOption);
+
+    const montserratOption = document.createElement('option');
+    montserratOption.value = 'Montserrat';
+    montserratOption.text = montserratText;
+    select.add(montserratOption);  
+    
+
+    const highLegibilityOptGroup = document.createElement('optgroup');
+    highLegibilityOptGroup.label = highLegibilityDesc;
+    highLegibilityOptGroup.appendChild(latoOption);
+    highLegibilityOptGroup.appendChild(montserratOption);
+    highLegibilityOptGroup.appendChild(opensansOption);
+    highLegibilityOptGroup.appendChild(robotoOption);
+    
+    
+    
+    select.appendChild(highLegibilityOptGroup);
+
+    // Seleccionar la opción correspondiente al cargar la página
+    if (font === originalFont) { // Nueva condición
+    select.selectedIndex = 0; // Nueva línea
+    } else if (font === 'OpenDyslexic') {
+    select.selectedIndex = 1;
+    } else if (font === 'Atkinson Hyperlegible') {
+    select.selectedIndex = 2;
+    } else if (font === 'Roboto') {
+    select.selectedIndex = 6;
+    } else if (font === 'Lato') {
+    select.selectedIndex = 3;
+    } else if (font === 'Open Sans') {
+    select.selectedIndex = 5;
+    } else if (font === 'Montserrat') {
+    select.selectedIndex = 4;
+    }
+
+    select.addEventListener('change', () => {
+    const font = select.value;
+    if (font === 'standard') {
+    setFont(originalFont);
+    fontSize = originalFontSize;
+    localStorage.setItem('fontSize', fontSize);
+    document.body.style.fontSize = localStorage.getItem('originalFontSize');
+    } else if (font === 'dyslexic') {
+    setFont('OpenDyslexic');
+    } else if (font === 'hyperlegible') {
+    setFont('Atkinson Hyperlegible');
+    } else if (font === 'Open Sans') {
+    setFont('Open Sans');
+    } else if (font === 'Roboto') {
+    setFont('Roboto');
+    } else if (font === 'Lato') {
+    setFont('Lato');
+    }  else if (font === 'Montserrat') {
+    setFont('Montserrat');
+    }
+    });
+
+    selectContainer.appendChild(select);
+    fontButtonContainer.appendChild(selectContainer);
+    
+
+    const increaseFontButton = document.createElement('button');
+    increaseFontButton.classList.add('font-button');
+    increaseFontButton.textContent = increaseFontText;
+    increaseFontButton.setAttribute('title', increaseFontTitle);
+    increaseFontButton.addEventListener('click', () => setFontSize(1));
+    fontButtonContainer.appendChild(increaseFontButton);
+
+    const decreaseFontButton = document.createElement('button');
+    decreaseFontButton.classList.add('font-button');
+    decreaseFontButton.textContent = decreaseFontText;
+    decreaseFontButton.setAttribute('title', decreaseFontTitle);
+    decreaseFontButton.addEventListener('click', () => setFontSize(-1));
+    fontButtonContainer.appendChild(decreaseFontButton);
+    
+    const translateButton = document.createElement('button');
+    translateButton.classList.add('font-button');
+    translateButton.textContent = translateText;
+    translateButton.setAttribute('title', translateTitle);
+    translateButton.addEventListener('click', toggleGoogleTranslateWidget);
+    fontButtonContainer.appendChild(translateButton);
+
+  // Botón para leer en voz alta
+    const readButton = document.createElement('button');
+    readButton.classList.add('font-button');
+    readButton.textContent = readText;
+    readButton.setAttribute('title', readTextTitle);
+    
+    readButton.addEventListener('click', () => {
+    let selectedText = window.getSelection().toString();
+    let text = '';
+    let lang = document.documentElement.lang;
+    if (selectedText !== '') {
+      text = selectedText;
+      let selectedNode = window.getSelection().anchorNode;
+      while (selectedNode && selectedNode.nodeType !== Node.ELEMENT_NODE) {
+        selectedNode = selectedNode.parentNode;
+      }
+      if (selectedNode) {
+        const selectedLang = selectedNode.getAttribute('lang');
+        if (selectedLang) {
+          lang = selectedLang;
+        }
+      }
+    } else {
+      text = document.body.innerText;
+      const bodyLang = document.body.getAttribute('lang');
+      if (bodyLang) {
+        lang = bodyLang;
+      }
+    }
+
+    utterance.lang = lang;
+    utterance.text = text;
+
+    if (!isReading) {
+      isReading = true;
+      readButton.textContent = `${stopText} (${lang})`;
+      readButton.setAttribute('title', stopTextTitle);
+      speechSynthesis.speak(utterance);
+    } else {
+      isReading = false;
+      readButton.textContent = readText;
+      readButton.setAttribute('title', readTextTitle);
+      speechSynthesis.cancel();
+    }
+
+    utterance.addEventListener('end', () => {
+      isReading = false;
+      readButton.textContent = readText;
+      readButton.setAttribute('title', readTextTitle);
+    });
+  });  
+    
+    fontButtonContainer.appendChild(readButton);
+    
+  // Botón para que la barra esté siempre visible
+    const floatingButton = document.createElement('button');
+    floatingButton.classList.add('font-button');
+    floatingButton.textContent = floatingFloat;
+    floatingButton.setAttribute('title', floatingFloatTitle);
+    floatingButton.addEventListener('click', () => {
+    if (floatingButton.textContent === floatingFix) {
+      fontButtonContainer.style.position = 'static';
+      floatingButton.textContent = floatingFloat;
+      floatingButton.setAttribute('title', floatingFloatTitle);
+      localStorage.setItem('floatState', 'static');
+    } else {
+      fontButtonContainer.style.position = 'fixed';
+      floatingButton.textContent = floatingFix;
+      floatingButton.setAttribute('title', floatingFixTitle);
+      localStorage.setItem('floatState', 'fixed');
+    }
+  });
+
+    
+
+    let floatState = localStorage.getItem('floatState');
+    if (!floatState) {
+      floatState = 'static';
+      floatingButton.textContent = floatingFix;
+      floatingButton.setAttribute('title', floatingFixTitle);
+    }
+    if (floatState === 'fixed') {
+      fontButtonContainer.style.position = 'fixed';
+      floatingButton.textContent = floatingFix;
+      floatingButton.setAttribute('title', floatingFixTitle);
+    } else {
+      fontButtonContainer.style.position = 'static';
+      floatingButton.textContent = floatingFloat;
+      floatingButton.setAttribute('title', floatingFloatTitle);
+    }
+    
+    localStorage.setItem('floatState', floatState);
+    
+  fontButtonContainer.appendChild(floatingButton);
+
+
+    const infoLink = document.createElement('a');
+    infoLink.textContent = infoText;
+    infoLink.href = infoTextLink;
+    infoLink.target = '_blank';
+    infoLink.style.marginLeft = '8px';
+    infoLink.style.fontSize = '12px';
+    fontButtonContainer.appendChild(infoLink);
+
+    
+    infoLink.classList.add('z-index');
+
+    document.body.insertBefore(fontButtonContainer, document.body.firstChild);
+   
+  });
+  
+  
+
+</script></head>
+<body class="exe-web-site" id="exe-node-181"><script type="text/javascript">document.body.className+=" js"</script>
+<div id="content">
+<p id="skipNav"><a href="#main" class="sr-av">Saltar la navegación</a></p>
+<header id="header" ><div id="headerContent">La chispa de la vida</div></header>
+<nav id="siteNav">
+<ul>
+   <li><a href="index.html" class="daddy main-node">Situación de Aprendizaje 3. La chispa de la vida</a></li>
+   <li><a href="antes_de_empezar.html" class="no-ch">Antes de empezar</a></li>
+   <li><a href="1_diseando_nuestro_circuito_elctrico.html" class="no-ch">1. Diseñando nuestro circuito eléctrico</a></li>
+   <li><a href="2_activando_nuestros_conocimientos.html" class="no-ch">2. Activando nuestros conocimientos</a></li>
+   <li><a href="3_explorando_acerca_de_la_electricidad.html" class="no-ch">3. Explorando acerca de la electricidad</a></li>
+   <li class="current-page-parent"><a href="4_estructurando_nuestro_conocimiento.html" class="current-page-parent daddy">4. Estructurando nuestro conocimiento</a>
+   <ul>
+      <li id="active"><a href="41_qu_es_un_circuito_elctrico_elementos_de_un_circuito_elctrico_y_funciones_bsicas.html" class="active no-ch">4.1. ¿Qué es un circuito eléctrico? Elementos de un circuito eléctrico y funciones básicas.</a></li>
+      <li><a href="42_las_magnitudes_elctricas_la_ley_de_ohm.html" class="no-ch">4.2. Las magnitudes eléctricas. La Ley de Ohm.</a></li>
+      <li><a href="43_circuitos_elctricos_abiertos_cerrados_y_en_cortocircuito.html" class="no-ch">4.3. Circuitos eléctricos abiertos, cerrados y en cortocircuito.</a></li>
+      <li><a href="44_cculo_de_resistencias_equivalentes.html" class="daddy">4.4. Cáculo de resistencias equivalentes</a>
+      <ul class="other-section">
+         <li><a href="441_resistencias_en_serie.html" class="no-ch">4.4.1. Resistencias en serie</a></li>
+         <li><a href="442_resistencias_en_paralelo.html" class="no-ch">4.4.2. Resistencias en paralelo</a></li>
+      </ul>
+      </li>
+   </ul>
+   </li>
+   <li><a href="5_aplicando_lo_aprendido.html" class="no-ch">5. Aplicando lo aprendido</a></li>
+   <li><a href="7_evaluando_lo_aprendido.html" class="no-ch">7. Evaluando lo aprendido</a></li>
+</ul>
+</nav>
+<div id='topPagination'>
+<nav class="pagination noprt">
+<a href="4_estructurando_nuestro_conocimiento.html" class="prev"><span><span>&laquo; </span>Anterior</span></a> <span class="sep">| </span><span class="page-counter">Página <strong>7</strong> de <strong>14</strong></span> <span class="sep">| </span><a href="42_las_magnitudes_elctricas_la_ley_de_ohm.html" class="next"><span>Siguiente<span> &raquo;</span></span></a>
+</nav>
+</div>
+<div id="main-wrapper">
+<section id="main">
+<header id="nodeDecoration"><h1 id="nodeTitle">4.1. ¿Qué es un circuito eléctrico? Elementos de un circuito eléctrico y funciones básicas.</h1></header>
+<article class="iDevice_wrapper UDLcontentIdevice" id="id1134">
+<div class="iDevice emphasis0" >
+<div id="ta1134_815_2" class="block iDevice_content">
+<div class="exe-udlContent exe-udlContent-representation"><section class="exe-udlContent-block js-hidden"><header class="exe-udlContent-header"><h2>Diccionario</h2></header><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><div class="exe-fx exe-accordion">
+<h2>Estructura</h2>
+<dl style="overflow: hidden;">
+<dt><strong>Definición</strong></dt>
+<dd>
+<p>Disposición o modo de estar relacionadas las distintas partes de un conjunto.</p>
+</dd>
+<dt><strong>Ejemplo</strong></dt>
+<dd>
+<p>El esqueleto es uno de los elementos estructurales más importantes del ser humano.</p>
+</dd>
+</dl>
+<h2>Natural</h2>
+<dl style="overflow: hidden;">
+<dt><strong>Definición</strong></dt>
+<dd>
+<p>Perteneciente o relativo a la naturaleza, es decir, a todo lo que no ha sido modificado o creado por la intervención humana.&nbsp;</p>
+</dd>
+<dt><strong>Ejemplo</strong></dt>
+<dd>
+<p>Por ejemplo, "recursos naturales", "fenómenos naturales".</p>
+</dd>
+</dl>
+<h2>Artificial</h2>
+<dl style="overflow: hidden;">
+<dt><strong>Definición</strong></dt>
+<dd>
+<p>Relativo a algo hecho, producido o creado por seres humanos en lugar de ser de origen natural.&nbsp;</p>
+</dd>
+<dt><strong>Ejemplo</strong></dt>
+<dd>
+<p>Por ejemplo, "inteligencia artificial", "sabor artificial".</p>
+</dd>
+</dl>
+</div></div></div></section></div>
+</div>
+</div>
+</article>
+<article class="iDevice_wrapper UDLcontentIdevice em_iDevice em_iDevice_udl_eng_orientaciones" id="id1135">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header"><h1 class="iDeviceTitle">1. La electricidad. La energía eléctrica</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<div id="ta1135_469_2" class="block iDevice_content">
+<div class="exe-udlContent exe-udlContent-engagement"><section class="exe-udlContent-block"><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><p><span style="font-weight: 400;"><img src="gif_animado_narrador_juvenil.gif" alt="Rétor dice ..." style="float: left; margin-right: 10px; margin-left: 10px;" width="125" height="125"></span></p>
+<p style="text-align: justify;">Todos los materiales están formados por partículas muy pequeñas llamadas átomos. A su vez, los átomos están compuestos por otras partículas aún más pequeñas, que se clasifican, según la naturaleza de su carga, en protones, neutrones y electrones. Entre estas partículas existen fuerzas de atracción o de repulsión que generan electricidad.</p>
+<p><img src="Captura_de_pantalla_2024-01-12_a_las_21.09.14.png" width="421" height="242" alt="" style="display: block; margin-left: auto; margin-right: auto;"></p>
+<table border="0" style="width: 80%; background-color: #fbff8f;" class="exe-table">
+<tbody>
+<tr>
+<td style="width: 821.203125px;">La <strong>electricidad</strong> es una forma de energía que permite que las partículas cargadas negativamente (electrones) se desplacen de un átomo a otro.</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: justify;">Este desplazamiento de electrones a través de un material conductor se denomina corriente eléctrica. <strong>La corriente eléctrica es el paso de electrones de un átomo a otro, dentro de un material conductor.</strong></p>
+<p><img src="Captura_de_pantalla_2024-01-12_a_las_21.16.49.png" width="523" height="159" alt="" style="display: block; margin-left: auto; margin-right: auto;"><br>&nbsp;<img src="Captura_de_pantalla_2024-01-12_a_las_21.23.05.png" width="790" height="567" alt="" style="display: block; margin-left: auto; margin-right: auto;"></p></div><article class="exe-udlContent-content-simplified js-hidden"><header class='exe-udlContent-alt-content-title'><h2>Lectura facilitada</h2></header><p>Una estructura se compone de elementos diseñados para resistir las fuerzas externas y evitar así la ruptura o deformación excesiva del cuerpo al que pertenecen.</p><button class="exe-udlContent-alt-content-hide">Cerrar</button></article></div></section></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="iDevice_wrapper UDLcontentIdevice em_iDevice em_iDevice_udl_rep_lee" id="id1136">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header"><h1 class="iDeviceTitle">2. Conductores y aislantes</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<div id="ta1136_470_2" class="block iDevice_content">
+<div class="exe-udlContent exe-udlContent-representation"><section class="exe-udlContent-block"><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><p style="text-align: justify;">Los materiales que dejan pasar la corriente eléctrica, como el cobre, el estaño, el aluminio, la plata o el hierro, se llaman <strong>conductores</strong>.</p>
+<p style="text-align: justify;">Los que impiden el paso de la corriente, como el plástico, el papel, la tela o la madera, se llaman <strong>aislantes</strong>.</p>
+<p style="text-align: justify;">Si observas las herramientas que utiliza un electricista, verás que el mango de todas ellas está fabricado de un material aislante, para evitar descargas eléctricas a través del metal de la herramienta. Los cables (por ejemplo, los que se utilizan en el taller o los que forman parte de la instalación eléctrica de una vivienda) están hechos de cobre y recubiertos de plástico, para que no se desvíe la corriente y protegernos de ella.</p>
+<p><img src="Captura_de_pantalla_2024-01-12_a_las_21.21.50.png" width="967" height="375" alt="" style="display: block; margin-left: auto; margin-right: auto;"></p></div><article class="exe-udlContent-content-simplified js-hidden"><header class='exe-udlContent-alt-content-title'><h2>Lectura facilitada</h2></header><p>Las estructuras naturales se forman sin intervención humana, presentes en seres vivos o producto de procesos geológicos, como la concha de un molusco, el nido de un pájaro o una cueva.</p>
+<p>En contraste, las estructuras artificiales son creadas por humanos, como las patas de una mesa, la carcasa de una cámara o los arcos de un puente.</p><button class="exe-udlContent-alt-content-hide">Cerrar</button></article></div></section></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="iDevice_wrapper UDLcontentIdevice em_iDevice em_iDevice_udl_rep_lee" id="id1616">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header"><h1 class="iDeviceTitle">3. Los circuitos eléctricos y sus componentes</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<div id="ta1616_470_2" class="block iDevice_content">
+<div class="exe-udlContent exe-udlContent-representation"><section class="exe-udlContent-block"><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><p><strong>EL CIRCUITO ELÉCTRICO</strong></p>
+<table border="0" style="width: 80%; background-color: #fbff8f;" class="exe-table">
+<tbody>
+<tr>
+<td style="width: 100%; text-align: justify;">Un <strong>circuito eléctrico</strong> es un conjunto de elementos conectados entre sí por los cuales circula la corriente eléctrica y <span style="text-decoration: underline;">que produce algún efecto</span> (como por ejemplo luz, calor, sonido o movimiento).&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center;"><img src="Captura_de_pantalla_2024-01-12_a_las_21.31.06.png" width="499" height="240" alt=""></p>
+<p style="text-align: justify;">Los circuitos eléctricos constan de cuatro componentes fundamentales:</p>
+<p><strong>GENERADORES</strong></p>
+<p style="text-align: justify;">Son los elementos que <strong>proporcionan</strong> al resto del circuito <strong>la energía eléctrica</strong> necesaria para que se muevan los electrones. Los generadores de corriente continua de un circuito son <strong>las pilas y las baterías.</strong></p>
+<p><img src="Captura_de_pantalla_2024-01-12_a_las_21.32.06.png" width="478" height="214" alt="" style="display: block; margin-left: auto; margin-right: auto;"></p>
+<p><strong>CONDUCTORES</strong></p>
+<p style="text-align: justify;">Son los elementos que <strong>transportan la energía eléctrica</strong> desde los generadores hasta los receptores, o, dicho de otro modo, son los elementos a través de los cuales circula la corriente eléctrica. Los elementos conductores de un circuito son<strong> los cables.</strong></p>
+<p><img src="Captura_de_pantalla_2024-01-12_a_las_21.33.17.png" width="408" height="152" alt="" style="display: block; margin-left: auto; margin-right: auto;"></p>
+<p><strong>RECEPTORES</strong></p>
+<p>Son los elementos que <strong>reciben la energía eléctrica</strong> procedente de los generadores y la transforman en otros tipos de energía útil. Son recep- tores en los circuitos: <strong>los motores, las bombillas, los zumbadores y las resistencias</strong>.</p>
+<p style="text-align: center;"><strong><img src="Captura_de_pantalla_2024-01-12_a_las_21.35.02.png" width="444" height="329" alt=""></strong></p>
+<p><strong>ELEMENTOS DE CONTROL</strong></p>
+<p style="text-align: justify;">Son los operadores que <strong>gobiernan el circuito</strong>, es decir, actúan de forma que permiten o interrumpen el paso de la corriente eléctrica. Los principales son <strong>los interruptores, los pulsadores y los conmutadores.</strong></p>
+<p style="text-align: center;"><strong><img src="Captura_de_pantalla_2024-01-12_a_las_21.35.50.png" width="527" height="394" alt=""></strong></p></div><article class="exe-udlContent-content-simplified js-hidden"><header class='exe-udlContent-alt-content-title'><h2>Lectura facilitada</h2></header><p>Las fuerzas que afectan una estructura se llaman cargas y se dividen en dos tipos: Cargas Fijas o Permanentes, que no cambian con el tiempo (por ejemplo, el peso de una estructura o elementos permanentes), y Cargas Variables, que pueden cambiar en momentos específicos (como el peso de personas o la fuerza del viento).</p>
+<p>Los esfuerzos en las estructuras varían según el punto de aplicación, dirección, sentido y geometría. Se definen como tensiones internas surgidas cuando un cuerpo está sujeto a fuerzas. En resumen, se explora la relación entre fuerzas, cargas y esfuerzos en el contexto de las estructuras.</p><button class="exe-udlContent-alt-content-hide">Cerrar</button></article></div></section></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="iDevice_wrapper textIdevice em_iDevice" id="id726">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header iDevice_header_noIcon"><h1 class="iDeviceTitle">4. ¿Cómo representamos los circuitos eléctricos? El esquema eléctrico</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<div id="ta726_1882_2" class="block iDevice_content">
+<div class="exe-text"><p style="text-align: justify;">Cuando queremos representar circuitos eléctricos utilizamos un dibujo muy sencillo denominado <strong>esquema eléctrico</strong>. Cada elemento de un circuito tiene un <strong>símbolo normalizado</strong> que permite representarlo de una forma simple y que sea entendida por todo el mundo. La representación simbólica de todos los elementos de un circuito mencionados hasta el momento se incluye en las páginas siguientes.</p>
+<p style="text-align: justify;">Observa la figura de la izquierda; en ella tenemos un circuito con una pila y tres bombillas. A la derecha está su esquema eléctrico equivalente.</p>
+<p><img src="Captura_de_pantalla_2024-01-12_a_las_22.58.01.png" width="623" height="139" alt="" style="display: block; margin-left: auto; margin-right: auto;" /></p>
+<p style="text-align: center;"><strong>SIMBOLOGÍA DE LOS ELEMENTOS DE UN CIRCUITO ELÉCTRICO</strong></p>
+<p><strong><img src="Captura_de_pantalla_2024-01-12_a_las_22.59.39.png" width="784" height="460" alt="" style="display: block; margin-left: auto; margin-right: auto;" /></strong></p>
+<p><strong><img src="Captura_de_pantalla_2024-01-12_a_las_23.00.10.png" width="787" height="590" alt="" style="display: block; margin-left: auto; margin-right: auto;" /></strong><strong></strong></p>
+<p><strong><img src="Captura_de_pantalla_2024-01-12_a_las_23.00.28.png" width="785" height="233" alt="" style="display: block; margin-left: auto; margin-right: auto;" /></strong></p>
+<p><strong><img src="Captura_de_pantalla_2024-01-12_a_las_23.00.49.png" width="773" height="803" alt="" style="display: block; margin-left: auto; margin-right: auto;" /></strong></p>
+<p><strong></strong></p>
+<p><strong></strong></p></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="iDevice_wrapper UDLcontentIdevice em_iDevice em_iDevice_udl_rep_apoyovisual" id="id1137">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header"><h1 class="iDeviceTitle">5. En vídeo</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<div id="ta1137_813_2" class="block iDevice_content">
+<div class="exe-udlContent exe-udlContent-representation"><section class="exe-udlContent-block"><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><div class="exe-fx exe-carousel">
+<h2>Comparamos un circuito eléctrico con un circuito hidráulico</h2>
+<p style="text-align: center;"><iframe width="560" height="314" src="https://www.youtube.com/embed/weFj0444VIE"></iframe></p>
+<p style="text-align: center;"><iframe width="560" height="314" src="https://www.youtube.com/embed/0ILuCAUzNWI"></iframe></p>
+</div></div></div></section></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="iDevice_wrapper UDLcontentIdevice em_iDevice em_iDevice_udl_exp_actividad" id="id1619">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header"><h1 class="iDeviceTitle">6. Ahora toca practicar</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<div id="ta1619_818_2" class="block iDevice_content">
+<div class="exe-udlContent exe-udlContent-expression"><section class="exe-udlContent-block"><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><p><img src="retor_adultos_sin_bocadillo_1_.png" alt="Rétor dice..." title="Rétor dice..." width="137" height="125" style="float: left; margin-right: 10px; margin-left: 10px;"></p>
+<p>Llega el momento de&nbsp;aplicar lo que has aprendido con estas dos actividades:</p></div></div></section><section class="exe-udlContent-block"><div class="exe-udlContent-content"><div class="exe-udlContent-content-main">
+<div class="exe-fx exe-tabs">
+<h2>Rosco de pasapalabra</h2>
+<p>Repasa con el rosco de Pasapalabra los conceptos que hemos trabajado hasta ahora. Pincha en este <a href="https://es.educaplay.com/recursos-educativos/11691752-ruleta_de_la_electricidad_1.html">enlace</a> para jugar.</p>
+<h2>Ejercicio para realizar en el cuaderno</h2>
+<p>&nbsp;Representa con símbolos cada uno de los siguiente circuitos eléctricos:&nbsp;</p>
+<p><img src="Captura_de_pantalla_2024-01-12_a_las_23.35.09.png" width="760" height="481" alt="" style="display: block; margin-left: auto; margin-right: auto;"></p>
+</div></div></div></section></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="iDevice_wrapper UDLcontentIdevice" id="id1143">
+<div class="iDevice emphasis0" >
+<div id="ta1143_814_2" class="block iDevice_content">
+<div class="exe-udlContent exe-udlContent-engagement"><section class="exe-udlContent-block js-hidden"><header class="exe-udlContent-header exe-udlContent-character-1"><h2><span class="sr-av">Motus dice </span>¿Qué es lo que más te ha gustado de la interacción con tus compañeros?</h2></header><div class="exe-udlContent-content"><div class="exe-udlContent-content-main"><p style="text-align: justify;"><span style="font-size: 12pt;">¿Te ha llamado la atención alguna pregunta planteada por alguno de ellos? ¿Se lo has dicho? ¡A todos y todas nos gusta saber lo que hacemos bien!</span></p></div></div></section></div>
+</div>
+</div>
+</article>
+<article class="iDevice_wrapper textIdevice em_iDevice em_iDevice_udl_eng_curiosidad" id="id1144">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header"><h1 class="iDeviceTitle">Contenido de refuerzo y profundización</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<div id="ta1144_813_2" class="block iDevice_content">
+<div class="exe-text"><p>Descubre más en:</p>
+<p><a href="https://drive.google.com/file/d/1WZVn1c9v6CenHI9cJFHELl8_QSkEun69/view">Electricidad. Pelandintecno.</a></p>
+<p></p></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<div id="packageLicense" class="cc cc-by-nc-sa">
+<p><span>Obra publicada con</span> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Licencia Creative Commons Reconocimiento No comercial Compartir igual 4.0</a></p>
+</div>
+</section>
+</div>
+<div id='bottomPagination'>
+<nav class="pagination noprt">
+<a href="4_estructurando_nuestro_conocimiento.html" class="prev"><span><span>&laquo; </span>Anterior</span></a> <span class="sep">| </span><span class="page-counter">Página <strong>7</strong> de <strong>14</strong></span> <span class="sep">| </span><a href="42_las_magnitudes_elctricas_la_ley_de_ohm.html" class="next"><span>Siguiente<span> &raquo;</span></span></a>
+</nav>
+</div>
+</div>
+<p id="made-with-eXe"><a href="https://exelearning.net/" target="_blank" rel="noopener"><span>Creado con eXeLearning<span> (Ventana nueva)</span></span></a></p><script type="text/javascript" src="_intef_js.js"></script></body></html>
